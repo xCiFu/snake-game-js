@@ -9,7 +9,7 @@ export class Border {
             this.wallImage.onload = () => {
                 this.imageLoaded = true;
             };
-            this.wallImage.src = '/resources/wall.png';
+            this.wallImage.src = 'resources/wall.png';
         }
     
         draw(ctx) {
