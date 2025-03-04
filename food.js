@@ -1,4 +1,5 @@
 export class Food {
+    
     constructor(gridSize, cols, rows) {
         this.updateGrid(gridSize, cols, rows);
         this.setRandomPosition();

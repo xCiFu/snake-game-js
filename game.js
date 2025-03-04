@@ -1,5 +1,6 @@
 import { Snake } from './snake.js';
 import { Food } from './food.js';
+import { Border } from './border.js';
 
 export class Game {
     constructor() {
@@ -12,6 +13,7 @@ export class Game {
         
         this.snake = new Snake(this.gridSize);
         this.food = new Food(this.gridSize, this.cols, this.rows);
+        this.border = new Border(this.gridSize, this.cols, this.rows);
         this.gameOver = false;
         this.score = 0;
 
@@ -64,6 +66,8 @@ export class Game {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.snake.draw(this.ctx);
         this.food.draw(this.ctx);
+        this.border.draw(this.ctx);
+        
 
         this.ctx.fillStyle = 'black';
         this.ctx.font = '20px Arial';
