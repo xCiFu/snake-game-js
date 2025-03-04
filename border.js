@@ -4,22 +4,36 @@ export class Border {
             this.size = gridSize;
             this.cols = cols;
             this.rows = rows;
+            this.wallImage = new Image();
+            this.imageLoaded = false;
+            this.wallImage.onload = () => {
+                this.imageLoaded = true;
+            };
+            this.wallImage.src = '/resources/wall.png';
         }
     
         draw(ctx) {
-            ctx.fillStyle = 'black';
+            if (!this.imageLoaded) return;
             
             // Dibujar borde superior
-            ctx.fillRect(0, 0, this.cols * this.size, this.size);
+            for (let x = 0; x < this.cols; x++) {
+                ctx.drawImage(this.wallImage, x * this.size, 0, this.size, this.size);
+            }
             
             // Dibujar borde inferior
-            ctx.fillRect(0, (this.rows - 1) * this.size, this.cols * this.size, this.size);
+            for (let x = 0; x < this.cols; x++) {
+                ctx.drawImage(this.wallImage, x * this.size, (this.rows - 1) * this.size, this.size, this.size);
+            }
             
             // Dibujar borde izquierdo
-            ctx.fillRect(0, 0, this.size, this.rows * this.size);
+            for (let y = 0; y < this.rows; y++) {
+                ctx.drawImage(this.wallImage, 0, y * this.size, this.size, this.size);
+            }
             
             // Dibujar borde derecho
-            ctx.fillRect((this.cols - 1) * this.size, 0, this.size, this.rows * this.size);
+            for (let y = 0; y < this.rows; y++) {
+                ctx.drawImage(this.wallImage, (this.cols - 1) * this.size, y * this.size, this.size, this.size);
+            }
         }
     }
     

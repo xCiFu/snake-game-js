@@ -28,16 +28,37 @@ export class Game {
     }
 
     resizeCanvas() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+        // Este método ahora está vacío ya que el tamaño se ajusta en calculateGrid
     }
 
     calculateGrid() {
-        // Hacer que la cuadrícula sea proporcional al viewport
-        // Queremos aproximadamente 30 columnas en el ancho
-        this.cols = 30;
-        this.gridSize = Math.floor(this.canvas.width / this.cols);
-        this.rows = Math.floor(this.canvas.height / this.gridSize);
+        // Primero, decidimos cuántas celdas queremos aproximadamente
+        const targetCols = 30;
+        const targetRows = 20;
+        
+        // Calculamos el tamaño de la cuadrícula basado en el espacio disponible
+        const gridSizeByWidth = Math.floor(window.innerWidth / targetCols);
+        const gridSizeByHeight = Math.floor(window.innerHeight / targetRows);
+        
+        // Usamos el tamaño más pequeño para mantener las celdas cuadradas
+        this.gridSize = Math.min(gridSizeByWidth, gridSizeByHeight);
+        
+        // Calculamos el número exacto de columnas y filas que caben
+        this.cols = Math.floor(window.innerWidth / this.gridSize);
+        this.rows = Math.floor(window.innerHeight / this.gridSize);
+        
+        // Calculamos el tamaño total del área de juego
+        const totalWidth = this.cols * this.gridSize;
+        const totalHeight = this.rows * this.gridSize;
+        
+        // Ajustamos el tamaño del canvas para que coincida exactamente
+        this.canvas.width = totalWidth;
+        this.canvas.height = totalHeight;
+        
+        // Centramos el canvas en la pantalla
+        this.canvas.style.position = 'absolute';
+        this.canvas.style.left = `${(window.innerWidth - totalWidth) / 2}px`;
+        this.canvas.style.top = `${(window.innerHeight - totalHeight) / 2}px`;
     }
 
     handleKeyPress(event) {

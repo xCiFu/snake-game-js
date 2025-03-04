@@ -3,6 +3,9 @@ export class Food {
     constructor(gridSize, cols, rows) {
         this.updateGrid(gridSize, cols, rows);
         this.setRandomPosition();
+        this.foodImage = new Image();
+        this.foodImage.src = 'resources/apple.png';
+        console.log(this.x, this.y);
     }
 
     updateGrid(gridSize, cols, rows) {
@@ -17,7 +20,7 @@ export class Food {
     }
 
     draw(ctx) {
-        ctx.fillStyle = 'red';
-        ctx.fillRect(this.x, this.y, this.size, this.size);
+  
+        ctx.drawImage(this.foodImage, this.x, this.y, this.size, this.size);
     }
 } 
